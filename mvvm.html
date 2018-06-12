@@ -1,57 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>MVVM</title>
+  <meta charset="UTF-8">
+  <title>MVVM</title>
 </head>
 <body>
 
-<div id="mvvm-app">
+  <div id="mvvm-app">
     <input type="text" v-model="someStr">
-    <input type="text" v-model="child.someStr">
+    <input type="text" v-model="child.child_someStr">
     <!-- <p v-class="className" class="abc">
         {{someStr}}
         <span v-text="child.someStr"></span>
     </p> -->
-    <p>{{getHelloWord}}</p>
+    <p>{{getText}}</p>
     <p v-html="htmlStr"></p>
     <button v-on:click="clickBtn">change model</button>
-</div>
+  </div>
 
-<script src="./js/observer.js"></script>
-<script src="./js/watcher.js"></script>
-<script src="./js/compile.js"></script>
-<script src="./js/mvvm.js"></script>
-<script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+  <script src="./js/compile.js"></script>
+  <script src="./js/mvvm.js"></script>
+  <script>
     var vm = new MVVM({
-        el: '#mvvm-app',
-        data: {
-            someStr: 'hello ',
-            className: 'btn',
-            htmlStr: '<span style="color: #f00;">red</span>',
-            child: {
-                someStr: 'World !'
-            }
-        },
-
-        computed: {
-            getHelloWord: function() {
-                return this.someStr + this.child.someStr;
-            }
-        },
-
-        methods: {
-            clickBtn: function(e) {
-                var randomStrArr = ['child_1', 'child_2', 'child_3'];
-                this.child.someStr = randomStrArr[parseInt(Math.random() * 3)];
-            }
+      el: '#mvvm-app',
+      data: {
+        someStr: 'someStr ',
+        className: 'btn',
+        htmlStr: '<span style="color: #f00;">red</span>',
+        child: {
+          child_someStr: 'child_someStr'
         }
+      },
+
+      computed: {
+        getText: function () {
+          return this.someStr + this.child.child_someStr;
+        }
+      },
+
+      methods: {
+        clickBtn: function (e) {
+          var randomStrArr = ['child_someStr_1', 'child_someStr_2', 'child_someStr_3'];
+          this.child.child_someStr = randomStrArr[parseInt(Math.random() * 3)];
+        }
+      }
     });
 
-    vm.$watch('child.someStr', function() {
-        console.log(arguments);
+    vm.$watch('child.child_someStr', function () {
+      console.log(vm._data, 'vm.$watch');
     });
-</script>
+  </script>
 
 </body>
 </html>

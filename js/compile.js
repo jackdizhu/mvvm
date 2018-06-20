@@ -22,10 +22,12 @@ Compile.prototype = {
     return fragment;
   },
 
+  // html 模版 初始化
   init: function () {
     this.compileElement(this.$fragment);
   },
 
+  // 编译模版
   compileElement: function (el) {
     var childNodes = el.childNodes,
       me = this;
@@ -47,6 +49,7 @@ Compile.prototype = {
     });
   },
 
+  // 编译 dom 绑定事件
   compile: function (node) {
     var nodeAttrs = node.attributes,
       me = this;
@@ -69,6 +72,7 @@ Compile.prototype = {
     });
   },
 
+  // 编译 text dom
   compileText: function (node, exp) {
     compileUtil.text(node, this.$vm, exp);
   },
